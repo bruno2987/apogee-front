@@ -10,7 +10,7 @@
 
         <div id="dernierArticle">
             <ul>
-                <li v-for="item in sixArticle" :key="item._id" @click="getOneArticle(item._id)">
+                <li v-for="item in sixArticle" :key="item._id" @click="loadOneArticle(item._id)">
                     {{item.titre}}
                 </li>
             </ul>
@@ -29,9 +29,10 @@ export default {
         }
     },
     methods: {
-        getOneArticle(id){
+        loadOneArticle(id){
             this.http.get('http://localhost:3000/users/getOneArticle/'+id)
                 .then((response) => {
+                    this.$store.commit('changeArticle',response.data.article)
                     this.ArticleSelect = response.data.article,
                     console.log(this.ArticleSelect)
                 })

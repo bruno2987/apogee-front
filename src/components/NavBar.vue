@@ -3,9 +3,9 @@
       <img id="logo" src="@/assets/images/Logo_complet_Modifié.png" alt="logo">
       <nav id="nav">
         <router-link to="/" id="navA">Accueil</router-link><p></p><p></p>  <!-- router-link se charge de la navigation en appelant les bonne routes contenues dans l'index de router -->
-        <router-link to="/articles" id="navA">Articles</router-link>
-        <router-link to="/evenement" id="navA">Evenemnement</router-link><p></p><p></p>
-        <router-link to="/workshop" id="navA">Workshop</router-link>
+        <router-link to="/articles" id="navA" @click.native="videStoreArticle">Articles</router-link>  <!-- pour appeler une methode sur un router-link, il faut ajouter .native à la directive @click:  @click.native="maFonction"  au lieu de  @click="maFonction" -->
+        <router-link to="/evenement" id="navA" @click.native="videStoreEvenement">Evenemnement</router-link><p></p><p></p>
+        <router-link to="/workshop" id="navA" @click.native="videStoreWorkshop">Workshop</router-link>
         <router-link to="/galerie" id="navA">Galerie</router-link><p></p><p></p>
         <router-link to="/partenaire" id="navA">Partenaire</router-link>
         <router-link to="/about" id="navA">à propos de nous</router-link><p></p><p></p>
@@ -20,6 +20,17 @@
 
 export default {
     name: 'NavBar',
+    methods: {
+      videStoreArticle(){
+        this.$store.commit('changeArticle','') // méthode pour vider article dans le store (cela permet de revenir à la liste)
+      },
+      videStoreEvenement(){
+        this.$store.commit('changeEvenement','') // méthode pour vider article dans le store (cela permet de revenir à la liste)
+      },
+      videStoreWorkshop(){
+        this.$store.commit('changeWorkshop','') // méthode pour vider article dans le store (cela permet de revenir à la liste)
+      },
+    }
 }
 </script>
 
