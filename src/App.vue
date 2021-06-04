@@ -3,7 +3,6 @@
     <NavBar/>
     <SideBar class="contenuPage"/>
     <router-view class="contenuPage"/>  <!-- C'est là où on place la balise router-view que le composant charger par le router sera affiché -->
-
   </div>
 </template>
 
@@ -35,9 +34,11 @@ export default {
   grid-template-rows: 350px 1fr 40px;
   grid-template-columns: 3.3fr 1fr;
   row-gap: 1ch;
-  min-height: 100vh;
   display: grid;
   justify-content: space-around;
+  background-image:url("./assets/images/IMG_0210.jpg");
+  background-repeat:  no-repeat;
+  background-attachment: scroll;
 }
 
 .contenuPage{
