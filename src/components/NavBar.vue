@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div id="bandeau">
       <img id="logo" src="@/assets/images/Logo_complet_Modifié.png" alt="logo">
       <nav id="nav">
@@ -14,6 +15,7 @@
       <router-link v-if="$store.state.login === 'on'" to="/monespace" id="connect"><p>mon espace</p></router-link>
       <router-link v-if="$store.state.login === 'off'" to="/connexion" id="connect"><p>connexion</p></router-link>
     </div>
+  </div>
 </template>
 
 <script>
@@ -45,7 +47,7 @@ $jaune: #F8AC1B;
   grid-column: 1/3;
   grid-row: 1/2;
   display:grid;
-  grid-template-rows: 6fr 1fr;
+  grid-template-rows: 3fr fr;
   grid-template-columns: 1fr 7.5fr 1fr;
   row-gap: 1.5rem;
   justify-content: center;
