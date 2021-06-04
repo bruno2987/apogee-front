@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button id="boutonRetour" @click="retourListe">Retour</button>
+        <button id="boutonRetour" v-if="getArticleStored" @click="retourListe">Retour</button>
         <div id="listeArticle" v-if="!$store.state.article"> <!-- La liste ne s'affiche que si l'attribut article dans le store (vuex) est vide. -->
             <div class="ligneArticle container topBotomBordersIn" v-for="item in AllArticles" :key="item._id" @click="getOneArticle(item._id)">
                 <div class="contenuLigneArticle">
@@ -67,7 +67,7 @@ $jaune: #F8AC1B;
 
 #listeArticle{
     display: grid;
-    row-gap: 1vh;
+    row-gap: 5vh;
 }
 
 .ligneArticle{

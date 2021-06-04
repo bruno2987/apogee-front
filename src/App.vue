@@ -28,17 +28,19 @@ export default {
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  grid-template-rows: 350px 1fr 40px;
+  color: rgb(141, 44, 9);
+  grid-template-rows: 300px 1fr 40px;
   grid-template-columns: 3.3fr 1fr;
   row-gap: 1ch;
   display: grid;
   justify-content: space-around;
-  background-image:url("./assets/images/IMG_0210.jpg");
+  background-image:url("./assets/images/IMG_0210_multiTest.jpg");
   background-repeat:  no-repeat;
-  background-attachment: scroll;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .contenuPage{

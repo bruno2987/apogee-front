@@ -1,6 +1,6 @@
 <template>  <!-- code très proche de articles et workshop mais qui requête dans la collection evenements -->
     <div>
-        <button id="boutonRetour" @click="retourListe">Retour</button>
+        <button id="boutonRetour" v-if="getEvenementStored" @click="retourListe">Retour</button>
         <div id="listeEvenement" v-if="!$store.state.evenement"> 
             <div class="ligneArticle container topBotomBordersIn" v-for="item in AllEvenements" :key="item._id" @click="getOnEvenement(item._id)">
                 <div class="contenuLigneArticle">
