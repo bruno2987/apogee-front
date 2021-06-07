@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Accueil from '../views/Accueil.vue'
-import Articles from '../views/Articles.vue'
-import Workshop from '../views/Workshop.vue'
-import Galerie from '../views/Galerie.vue'
-import Partenaire from '../views/Partenaire.vue'
-import Connexion from '../views/Connexion.vue'
+import Accueil from '../components/Accueil.vue'
+import Articles from '../components/Articles.vue'
+import Workshop from '../components/Workshop.vue'
+import Galerie from '../components/Galerie.vue'
+import Partenaire from '../components/Partenaire.vue'
+import Connexion from '../components/Connexion.vue'
 import testRegis from '../components/test.vue'
-import MonEspace from '../views/MonEspace.vue'
-import nouvelArticle from '../views/nouvelArticle'
-import nouvelAdmin from '../views/nouvelAdmin'
-import evenement from '../views/evenement'
-
+import MonEspace from '../components/MonEspace.vue'
+import nouvelArticle from '../components/nouvelArticle'
+import nouvelAdmin from '../components/nouvelAdmin'
+import evenement from '../components/evenement'
+import nouvelGalerie from '../components/nouvelGalerie'
 
 Vue.use(VueRouter)   // utilisation du plugin VueRouter
 
@@ -63,7 +63,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/About.vue')
   },
 
   /////////////////////////////////   Route d'admin 
@@ -81,6 +81,11 @@ const routes = [
     path: '/nouvelarticle',
     name: 'nouvelArticle',
     component: nouvelArticle
+  },
+  {
+    path: '/nouvelGalerie',
+    name: 'nouvelGalerie',
+    component: nouvelGalerie
   },
 ]
 
