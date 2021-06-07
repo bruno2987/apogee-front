@@ -7,10 +7,6 @@ import store from './store'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload)
 
-import VueClip from 'vue-clip';
-
-Vue.use(VueClip)
-
 
 //Dans la console, installer le plugin vueex pour le data store avec la commande "vue add vuex"
 
