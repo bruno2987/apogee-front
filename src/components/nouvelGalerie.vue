@@ -1,7 +1,9 @@
 <template>
     <div>
-        <UploadImages @change="handleImages"/>
- <h1>{{test}}</h1>
+        <label for="titre">Titre de l'album</label>
+        <input type="text" v-model="titre" name="titre">
+        <UploadImages @change="handleImages" v-model="files"/>
+        <button @click="sendToServer">envoyer</button>
     </div>
 </template>
 
@@ -15,32 +17,26 @@ export default {
     },
     data() {
         return {
-            test:''
+            titre:'',
+            files:null,
         }
     },
     methods: {
         handleImages(files) {
-            this.test= 'Mess TEST'
-            console.log(files)
-            this.http.post('http://localhost:3000/admin/galerie/recordGalerie',{files : files})
+            let datas = new FormData()
+            files.forEach(element => {
+                datas.append('file',element)
+            })
+            this.files = datas;
+        },
+        sendToServer(){
+                this.files.append('titre',this.titre)
+                        this.http.post('http://localhost:3000/admin/galerie/recordGalerie', this.files)
                 .then((response) => {
                     console.log(response)
+                    this.files = null
                 })
         },
-beforeRemove (index, done, fileList) {
-      console.log('index', index, fileList)
-        this.http.post('http://localhost:3000/admin/galerie/deleteImgNewGalerie',{index: index})
-        done()
-      },
-        editImage (formData, index, fileList) {
-            console.log('edit data', formData, index, fileList)
-            },
-        limitExceeded(amount){
-        console.log('limitExceeded data', amount)
-        }  
     },
-    beforeDestroy(){
-        console.log('destruction')
-    } 
 }
 </script>
