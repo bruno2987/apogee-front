@@ -219,7 +219,7 @@ $jaune: #F8AC1B;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr ;
-    width: 23rem;
+    width: 60vh;
     justify-content: space-around;
     justify-self: center;
 }

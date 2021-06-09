@@ -1,9 +1,11 @@
 <template>
     <div>
-        <label for="titre">Titre de l'album</label>
-        <input type="text" v-model="titre" name="titre">
-        <UploadImages @change="handleImages" v-model="files"/>
-        <button @click="sendToServer">envoyer</button>
+        <button @click="displayFormAlbum = true , message=''">Créer un nouvel album</button>
+        <h3 v-if="message" style="color: green">{{message}}</h3>
+        <label v-if="displayFormAlbum" for="titre">Titre de l'album</label>
+        <input v-if="displayFormAlbum" type="text" v-model="titre" name="titre">
+        <UploadImages v-if="displayFormAlbum" @change="handleImages"/>
+        <button v-if="titre && images" @click="sendToServer">envoyer</button>
     </div>
 </template>
 
@@ -18,23 +20,29 @@ export default {
     data() {
         return {
             titre:'',
-            files:null,
+            images:'',
+            formToSend:new FormData(),
+            message:'',
+            displayFormAlbum:false
         }
     },
     methods: {
         handleImages(files) {
-            let datas = new FormData()
-            files.forEach(element => {
-                datas.append('file',element)
-            })
-            this.files = datas;
+            this.images = files
         },
         sendToServer(){
-                this.files.append('titre',this.titre)
-                        this.http.post('http://localhost:3000/admin/galerie/recordGalerie', this.files)
+            this.images.forEach(element => {
+                this.formToSend.append('file',element)
+            })
+            this.formToSend.append('titre',this.titre)
+
+            this.http.post('http://localhost:3000/admin/galerie/recordGalerie', this.formToSend)
                 .then((response) => {
-                    console.log(response)
-                    this.files = null
+                    this.images = ''
+                    this.titre=''
+                    this.formToSend= new FormData()
+                    this.displayFormAlbum= false
+                    this.message= response.data.message
                 })
         },
     },
