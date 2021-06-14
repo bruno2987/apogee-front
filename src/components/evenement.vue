@@ -43,6 +43,7 @@ export default {
         },
     },
     beforeCreate() {
+        scrollTo(1,1)
         this.http.get('http://localhost:3000/users/getAllEvenements')
             .then((response) => 
             response.data.articles.forEach(element => {

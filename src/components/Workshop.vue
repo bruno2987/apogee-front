@@ -42,7 +42,8 @@ export default {
             this.$store.commit('changeWorkshop','') 
         },
     },
-    beforeCreate() {    
+    beforeCreate() { 
+        scrollTo(1,1)   
         this.http.get('http://localhost:3000/users/getAllWorkshops')
             .then((response) => 
             response.data.articles.forEach(element => {

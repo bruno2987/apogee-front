@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button id="boutonRetour" v-if="getArticleStored" @click="retourListe">Retour</button>
+        <button class="boutonOrange" v-if="getArticleStored" @click="retourListe">Retour</button>
         <div id="listeArticle" v-if="!$store.state.article"> <!-- La liste ne s'affiche que si l'attribut article dans le store (vuex) est vide. -->
             <div class="ligneArticle container topBotomBordersIn" v-for="item in AllArticles" :key="item._id" @click="getOneArticle(item._id)">
                 <div class="contenuLigneArticle">
@@ -43,6 +43,7 @@ export default {
         },
     },
     beforeCreate() {
+        scrollTo(1,1)
         this.http.get('http://localhost:3000/users/getAllArticles')
             .then((response) => 
             response.data.articles.forEach(element => {
@@ -138,7 +139,7 @@ div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
     cursor: pointer;
 }
 
-  #boutonRetour{
+  .boutonOrange{
     height: 1.4em;
     width: 5.5em;
     grid-column: 1/1;
@@ -163,7 +164,7 @@ div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
       font-size: 0.8em;
     }
   }
-  #boutonRetour:before {
+  .boutonOrange:before {
     content: "";
     background-color: rgba(255, 255, 255, 0.3);
     height: 100%;
@@ -178,12 +179,12 @@ div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
     -webkit-transition: none;
     transition: none;
   }
-  #boutonRetour:hover {
+  .boutonOrange:hover {
     background-color: rgb(223, 198, 37);
     color: black;
     border: solid 1px black;
   }
-  #boutonRetour:hover:before {
+  .boutonOrange:hover:before {
     -webkit-transform: skewX(-45deg) translateX(18em);
     transform: skewX(-45deg) translateX(18em);
     -webkit-transition: all 0.7s ease-in-out;

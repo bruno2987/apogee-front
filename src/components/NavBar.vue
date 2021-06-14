@@ -1,21 +1,34 @@
 <template>
   <div id="navComposant">
     <div id="bandeau">
+      <router-link v-if="$store.state.login === 'on'" to="/monespace" id="connect"><p>mon espace</p></router-link>
+      <router-link v-if="$store.state.login === 'off'" to="/connexion" id="connect"><p>connexion</p></router-link>
       <nav id="nav">
         <router-link to="/" id="navA">Accueil</router-link><p></p><p></p>  <!-- router-link se charge de la navigation en appelant les bonne routes contenues dans l'index de router -->
         <router-link to="/articles" id="navA" @click.native="videStoreArticle">Articles</router-link>  <!-- pour appeler une methode sur un router-link, il faut ajouter .native à la directive @click:  @click.native="maFonction"  au lieu de  @click="maFonction" -->
-        <router-link to="/evenement" id="navA" @click.native="videStoreEvenement">Evenemnement</router-link><p></p><p></p>
+        <router-link to="/evenement" id="navA" @click.native="videStoreEvenement">Evenement</router-link><p></p><p></p>
         <router-link to="/workshop" id="navA" @click.native="videStoreWorkshop">Workshop</router-link>
         <router-link to="/galerie" id="navA">Galerie</router-link><p></p><p></p>
         <router-link to="/partenaire" id="navA">Partenaire</router-link>
         <router-link to="/about" id="navA">à propos de nous</router-link>
       </nav>
-        <router-link v-if="$store.state.login === 'on'" to="/monespace" id="connect"><p>mon espace</p></router-link>
-        <router-link v-if="$store.state.login === 'off'" to="/connexion" id="connect"><p>connexion</p></router-link>
+
+
+      <!-- <button id="boutonHamburger"><img src="@/assets/images/Hamburger.png" alt=""></button>
+      <div id="hamburger">
+        <div id="menu">
+        <router-link to="/" id="navH">Accueil</router-link>
+        <router-link to="/articles" id="navH" @click.native="videStoreArticle">Articles</router-link>  
+        <router-link to="/evenement" id="navH" @click.native="videStoreEvenement">Evenement</router-link>
+        <router-link to="/workshop" id="navH" @click.native="videStoreWorkshop">Workshop</router-link>
+        <router-link to="/galerie" id="navH">Galerie</router-link>
+        <router-link to="/partenaire" id="navH">Partenaire</router-link>
+        <router-link to="/about" id="navH">à propos de nous</router-link>
+        </div>
+      </div> -->
+
     </div>
-    <div id="logoEtConnect">
-      <img id="logo" @click="goAccueil" src="@/assets/images/Logo_complet_Modifié.png" alt="logo" height="150" width="500">
-    </div>
+    <img id="logo" @click="goAccueil" src="@/assets/images/Logo_complet_Modifié.png" alt="logo" height="150" width="500">
   </div>
 </template>
 
@@ -50,27 +63,25 @@ $jaune: #F8AC1B;
   grid-column: 1/3;
   grid-row: 1/1;
   display: grid;
-  grid-template-rows: 1fr 9fr;
+  grid-auto-flow: column;
+  
 }
 
 #bandeau {
+  position: fixed;
   grid-row: 1/2;
-  grid-template-columns: 1fr 10fr 1fr;
+  z-index: 4;
+  width: 100%;
+  // grid-template-columns: 1fr 10fr 1fr;
   background-image: radial-gradient(circle at 23% 61%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 8%,transparent 8%, transparent 92%),radial-gradient(circle at 34% 3%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 8%,transparent 8%, transparent 92%),radial-gradient(circle at 10% 76%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 20% 80%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 48% 51%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 69% 29%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 34% 68%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 22% 7%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 15% 88%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 14% 20%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),linear-gradient(135deg, rgb(212, 14, 0),rgb(223, 198, 37));
   display:grid;
-  row-gap: 0.5rem;
   justify-content: center;
   padding: 0.2rem;
   margin: 0;
 }
 
-#logoEtConnect{
-  display: grid;
-  grid-template-columns: 1fr 7fr 1fr;
-}
-
 #logo {
-  grid-column: 2/3;
+  grid-row: 2/3;
   align-self: center;
   justify-self: center;
   cursor: pointer;
@@ -79,9 +90,10 @@ $jaune: #F8AC1B;
 #connect{
   height: 1.4em;
   width: 5.5em;
-  grid-column: 3/4;
-  justify-self: right;
   text-decoration: none;
+  position: absolute;
+  right: 10px;
+  top:10px;
 
   border: solid 1px $orangeF;
   color: black;
@@ -90,7 +102,7 @@ $jaune: #F8AC1B;
   border-radius: 20px;
   -webkit-transition: all 0.7s ease-in-out;
   transition: all 0.7s ease-in-out;
-  position: relative;
+
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -148,4 +160,17 @@ nav {
   }
 }
 
+#boutonHamburger img{
+  height: 3vh;
+}
+#boutonHamburger{
+  position: absolute;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  top: 10px;
+  left: 10px;
+
+}
 </style>

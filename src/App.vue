@@ -39,6 +39,8 @@ export default {
   justify-content: space-around;
   background-image:url("./assets/images/IMG_0210_multiTest.jpg");
   background-repeat:  no-repeat;
+  background-size: auto;  // Pour que l'image de background s'adapte à la taille d'écran
+
   background-position: center;
   background-attachment: fixed;
 }

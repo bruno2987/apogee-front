@@ -8,7 +8,7 @@ import Partenaire from '../components/Partenaire.vue'
 import Connexion from '../components/Connexion.vue'
 import testRegis from '../components/test.vue'
 import MonEspace from '../components/MonEspace.vue'
-import nouvelArticle from '../components/nouvelArticle'
+import ListeContenuCreationModif from '../components/listeContenuCreationModif'
 import nouvelAdmin from '../components/nouvelAdmin'
 import evenement from '../components/evenement'
 import nouvelGalerie from '../components/nouvelGalerie'
@@ -78,9 +78,9 @@ const routes = [
     component: nouvelAdmin
   },
   {
-    path: '/nouvelarticle',
-    name: 'nouvelArticle',
-    component: nouvelArticle
+    path: '/listeContenuCreationModif',
+    name: 'listeContenuCreationModif',
+    component: ListeContenuCreationModif
   },
   {
     path: '/nouvelGalerie',

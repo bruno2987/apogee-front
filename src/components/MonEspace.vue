@@ -2,7 +2,7 @@
     <div>
         Mon espace
         <div id="navAdmin">
-            <router-link to="/nouvelarticle" id="navA">Créer un nouvel article</router-link> <br>
+            <router-link to="/ListeContenuCreationModif" id="navA">Créer/Modifier contenu</router-link> <br>
             <router-link to="/nouveladmin" id="navA">Inscrire un nouvel administrateur</router-link> <br>
             <router-link to="/nouvelGalerie" id="navA">Ajouter une nouvelle galerie</router-link>
         </div>
