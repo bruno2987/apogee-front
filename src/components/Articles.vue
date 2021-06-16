@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="article">
         <button class="boutonOrange" v-if="getArticleStored" @click="retourListe">Retour</button>
         <div id="listeArticle" v-if="!$store.state.article"> <!-- La liste ne s'affiche que si l'attribut article dans le store (vuex) est vide. -->
             <div class="ligneArticle container topBotomBordersIn" v-for="item in AllArticles" :key="item._id" @click="getOneArticle(item._id)">
@@ -70,75 +70,22 @@ $jaune: #F8AC1B;
     display: grid;
     row-gap: 5vh;
 }
-
 .ligneArticle{
-    display: grid;
-    width: 100vh;
-    margin: 3vh;
-    .contenuLigneArticle{
-        display: grid;
-        grid-template-areas: "titre titre titre"
-                         "image resume resume";
-        row-gap: 1vh;
-        column-gap: 1vh;
-
+    h2{
+        grid-area: titre;
+        text-align: center;
     }
-        h2{
-            grid-area: titre;
-            text-align: center;
-        }
-        img{
-            grid-area: image;
-            max-height:25vh;  /* Grâce à l'attribut width de la balise img, la photo est redimensionnée en gardant les proportions, max-height permet qu'elle ne puisse pas dépasser tout de même 150px de auteur même après redimensionnemnt */
-            object-fit:cover  /*permet de couper la photo au lieu de l'aplatir si elle est redimensionnée */
-        }
-        #resume{
-            grid-area: resume;
-            align-self: center;
-        }
+    img{
+        grid-area: image;
+        max-height:25vh;  /* Grâce à l'attribut width de la balise img, la photo est redimensionnée en gardant les proportions, max-height permet qu'elle ne puisse pas dépasser tout de même 150px de auteur même après redimensionnemnt */
+        object-fit:cover  /*permet de couper la photo au lieu de l'aplatir si elle est redimensionnée */
+    }
+    #resume{
+        grid-area: resume;
+        align-self: center;
+        justify-self: left;
+    }
 }
-
-div.topBotomBordersIn div::before,.ligneArticle.topBotomBordersIn div::after{
-    position: absolute;
-    left: 0px;
-    width: 100vh;
-    height: 2px;
-    background: $orangeF;
-    content: "";
-    opacity: 0;
-    transition: all 0.3s;
-}
-div.topBotomBordersIn div:before{
-    top: 0px;
-    width: 100vh;
-    transform: translateY(-10px);
-}
-div.topBotomBordersIn div:after{
-    bottom: 0px;
-    width: 100vh;
-    transform: translateY(10px);
-}
-div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
-    opacity: 1;
-    width: 100vh;
-    transform: translateY(0px);
-}
-
-.ligneArticle.container{
-    margin: 0 auto;
-	padding: 10px 5px;
-    width: 100vh;
-}
-
-.ligneArticle.container div{
-
-    margin: 0px 10px;
-    padding: 10px 10px;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;
-}
-
   .boutonOrange{
     height: 1.4em;
     width: 5.5em;
@@ -147,7 +94,6 @@ div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
     justify-self: left;
     text-decoration: none;
     background-color: $orangeF;
-
     border: solid 1px $jaune;
     color: #fff;
     font-size: 20px;
@@ -163,33 +109,102 @@ div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
     p{
       font-size: 0.8em;
     }
-  }
-  .boutonOrange:before {
-    content: "";
-    background-color: rgba(255, 255, 255, 0.3);
-    height: 100%;
-    width: 3em;
-    position: absolute;
-    top: 0;
-    left: -4.5em;
-    -webkit-filter: blur(3px);
-    filter: blur(3px);
-    -webkit-transform: skewX(-45deg) translateX(0);
-    transform: skewX(-45deg) translateX(0);
-    -webkit-transition: none;
-    transition: none;
-  }
-  .boutonOrange:hover {
-    background-color: rgb(223, 198, 37);
-    color: black;
-    border: solid 1px black;
-  }
-  .boutonOrange:hover:before {
-    -webkit-transform: skewX(-45deg) translateX(18em);
-    transform: skewX(-45deg) translateX(18em);
-    -webkit-transition: all 0.7s ease-in-out;
-    transition: all 0.7s ease-in-out;
-  }
+}
+.boutonOrange:before {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 100%;
+  width: 3em;
+  position: absolute;
+  top: 0;
+  left: -4.5em;
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+  -webkit-transform: skewX(-45deg) translateX(0);
+  transform: skewX(-45deg) translateX(0);
+  -webkit-transition: none;
+  transition: none;
+}
+.boutonOrange:hover {
+  background-color: rgb(223, 198, 37);
+  color: black;
+  border: solid 1px black;
+}
+.boutonOrange:hover:before {
+  -webkit-transform: skewX(-45deg) translateX(18em);
+  transform: skewX(-45deg) translateX(18em);
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+}
+
+@media screen and (min-width: 1024px){
+    .ligneArticle{
+    display: grid;
+    margin: 3vh;
+    .contenuLigneArticle{
+        display: grid;
+        grid-template-areas: "titre titre titre"
+                         "image resume resume";
+        row-gap: 1vh;
+        column-gap: 1vh;
+        }
+    }
+//  Partie pour créer l'animation à la sélection des articles (elle n'est pas nécessaire sur un portable/tablette: C'est pourquoi elle est placé dans cette media query)
+    div.topBotomBordersIn div::before,.ligneArticle.topBotomBordersIn div::after{
+        position: absolute;
+        left: 0px;
+        width: 100%;
+        height: 2px;
+        background: $orangeF;
+        content: "";
+        opacity: 0;
+        transition: all 0.3s;
+    }
+    div.topBotomBordersIn div:before{
+        top: 0px;
+        width: 100%;
+        transform: translateY(-10px);
+    }
+    div.topBotomBordersIn div:after{
+        bottom: 0px;
+        width: 100%;
+        transform: translateY(10px);
+    }
+    div.topBotomBordersIn div:hover:before,div.topBotomBordersIn div:hover:after{
+        opacity: 1;
+        width: 100%;
+        transform: translateY(0px);
+    }
+    .ligneArticle.container{
+        margin: 0 auto;
+        padding: 10px 5px;
+        width: 100vh;
+    }
+    .ligneArticle.container div{
+        margin: 0px 10px;
+        padding: 10px 10px;
+        position: relative;
+        z-index: 0;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .contenuLigneArticle{
+      display: grid;
+      grid-template-areas: "titre"
+                         "image"
+                         "resume";
+      justify-items: center;
+      #resume{
+          padding: 2vw;
+      }
+    }
+    .ligneArticle.container{
+        width: 100%;
+        margin: 0;
+    }
+}
 
 
 

@@ -10,33 +10,42 @@
         <router-link to="/workshop" id="navA" @click.native="videStoreWorkshop">Workshop</router-link>
         <router-link to="/galerie" id="navA">Galerie</router-link><p></p><p></p>
         <router-link to="/partenaire" id="navA">Partenaire</router-link>
-        <router-link to="/about" id="navA">à propos de nous</router-link>
       </nav>
 
 
-      <!-- <button id="boutonHamburger"><img src="@/assets/images/Hamburger.png" alt=""></button>
-      <div id="hamburger">
-        <div id="menu">
-        <router-link to="/" id="navH">Accueil</router-link>
-        <router-link to="/articles" id="navH" @click.native="videStoreArticle">Articles</router-link>  
-        <router-link to="/evenement" id="navH" @click.native="videStoreEvenement">Evenement</router-link>
-        <router-link to="/workshop" id="navH" @click.native="videStoreWorkshop">Workshop</router-link>
-        <router-link to="/galerie" id="navH">Galerie</router-link>
-        <router-link to="/partenaire" id="navH">Partenaire</router-link>
-        <router-link to="/about" id="navH">à propos de nous</router-link>
+      <button id="boutonHamburger" @click="afficheSideBar"><img src="@/assets/images/Hamburger.png" alt=""></button>
+        <div id="hamburger-sideBar">
+          <router-link to="/" id="navH">Accueil</router-link>
+          <router-link to="/articles" id="navH" @click.native="videStoreArticle();cacheSideBar();">Articles</router-link>  
+          <router-link to="/evenement" id="navH" @click.native="videStoreEvenement();cacheSideBar();">Evenement</router-link>
+          <router-link to="/workshop" id="navH" @click.native="videStoreWorkshop();cacheSideBar();">Workshop</router-link>
+          <router-link to="/galerie" id="navH" @click.native="cacheSideBar();">Galerie</router-link>
+          <router-link to="/partenaire" id="navH">Partenaire</router-link>
+          <router-link to="/about" id="navH">à propos de nous</router-link>
         </div>
-      </div> -->
-
+        <div id="hamburger-overlay" @click="cacheSideBar" @keyup.esc="cacheSideBar"></div>
     </div>
-    <img id="logo" @click="goAccueil" src="@/assets/images/Logo_complet_Modifié.png" alt="logo" height="150" width="500">
-  </div>
+    
+  <img id="logo" @click="goAccueil" src="@/assets/images/Logo_complet_Modifié.png" alt="logo" height="150" width="500">
+</div>
 </template>
 
 <script>
 
 export default {
     name: 'NavBar',
+    data () {
+      return {
+        
+      }
+    },
     methods: {
+      afficheSideBar(){
+        document.querySelector('#hamburger-sideBar').classList.add('hamburger-activated')
+      },
+      cacheSideBar(){
+        document.querySelector('#hamburger-sideBar').classList.remove('hamburger-activated')
+      },
       videStoreArticle(){
         this.$store.commit('changeArticle','') // méthode pour vider article dans le store (cela permet de revenir à la liste)
       },
@@ -64,19 +73,17 @@ $jaune: #F8AC1B;
   grid-row: 1/1;
   display: grid;
   grid-auto-flow: column;
-  
+  width: 100%;
 }
 
 #bandeau {
   position: fixed;
-  grid-row: 1/2;
   z-index: 4;
   width: 100%;
-  // grid-template-columns: 1fr 10fr 1fr;
   background-image: radial-gradient(circle at 23% 61%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 8%,transparent 8%, transparent 92%),radial-gradient(circle at 34% 3%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 8%,transparent 8%, transparent 92%),radial-gradient(circle at 10% 76%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 20% 80%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 48% 51%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 69% 29%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 34% 68%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 22% 7%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 15% 88%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 14% 20%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 4%,transparent 4%, transparent 96%),linear-gradient(135deg, rgb(212, 14, 0),rgb(223, 198, 37));
   display:grid;
   justify-content: center;
-  padding: 0.2rem;
+  padding: 0.2rem 0rem 0.2rem 0rem;
   margin: 0;
 }
 
@@ -164,13 +171,69 @@ nav {
   height: 3vh;
 }
 #boutonHamburger{
-  position: absolute;
+  display: none;
+  position: fixed;
   border: none;
   background: none;
   cursor: pointer;
   padding: 0;
   top: 10px;
   left: 10px;
-
 }
+#hamburger-sideBar {
+  position: fixed;
+  width: 50%;
+  z-index: 15;
+  top:0;
+  left: 0;
+  display: grid;
+  row-gap: 2vh;
+  grid-auto-flow: row;
+  grid-template: 1fr;
+  background-color: brown;
+  transform: translateX(-100%);
+  transition: transform 0.2s ease-out;
+}
+
+#hamburger-overlay{
+  position: fixed;
+  display: none;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: rgba(221, 152, 61, 0.4);
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 1024px){
+  #bandeau{
+    position: fixed;
+    height: 1vh;
+    padding: 0;
+  }
+
+  #nav,#connect{
+    display: none;
+  }
+  #boutonHamburger{
+    display: block;
+    position: fixed;
+  }
+
+  #logo{
+    height: 15vh;
+    width: auto;
+  }
+
+  #hamburger-sideBar.hamburger-activated+#hamburger-overlay{
+    display: block;
+  }
+
+  .hamburger-activated#hamburger-sideBar{
+    transform: translateX(0);
+  }
+}
+
+
 </style>

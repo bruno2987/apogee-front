@@ -114,4 +114,11 @@ $jaune: #F8AC1B;
         }
     }
 }
+
+@media screen and (max-width: 1250px){
+    #sideBar{
+        display: none;
+    }
+}
+
 </style>

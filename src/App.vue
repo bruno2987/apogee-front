@@ -34,19 +34,34 @@ export default {
   color: rgb(141, 44, 9);
   grid-template-rows: 300px 1fr 40px;
   grid-template-columns: 3.3fr 1fr;
-  row-gap: 1ch;
   display: grid;
   justify-content: space-around;
   background-image:url("./assets/images/IMG_0210_multiTest.jpg");
   background-repeat:  no-repeat;
   background-size: auto;  // Pour que l'image de background s'adapte à la taille d'écran
-
   background-position: center;
   background-attachment: fixed;
+  h1{
+    font-size: 4vh;
+  }
+  h2{
+    font-size: 3vh;
+  }
+  p{
+    font-size: 2.5vh;
+  }
 }
 
 .contenuPage{
-  margin: 40px;
+  margin-top: 4.5vh;
+  width: 100%;
+}
+
+@media screen and (max-width: 1024px){
+  #app{
+      grid-template-columns: 1fr;
+      grid-template-rows: 110px 1fr 20px;
+  }
 }
 
 
