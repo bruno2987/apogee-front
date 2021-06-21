@@ -3,17 +3,20 @@
     <NavBar/>
     <SideBar class="contenuPage"/>
     <router-view class="contenuPage"/>  <!-- C'est là où on place la balise router-view que le composant charger par le router sera affiché -->
+    <Footer/>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
 import SideBar from '@/components/sideBar.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   components: {
   NavBar,
-  SideBar
+  SideBar,
+  Footer,
   }
 }
 </script>
@@ -54,14 +57,28 @@ export default {
 
 .contenuPage{
   margin-top: 4.5vh;
+  min-height: 100vh;
   width: 100%;
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1250px){
   #app{
       grid-template-columns: 1fr;
-      grid-template-rows: 110px 1fr 20px;
+      grid-template-rows: 130px 1fr 20px;
   }
+  #corpsArticle>p>img{
+    max-width: 60vw;
+    height: auto;
+  }
+  #corpsArticle>p>iframe{
+  max-width: 70vw;
+  max-height: 30vh;
+  border:none
+  }
+}
+
+#corpsArticle>p>iframe{
+  border:none
 }
 
 

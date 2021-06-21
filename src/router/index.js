@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Accueil from '../components/Accueil.vue'
-import Articles from '../components/Articles.vue'
-import Workshop from '../components/Workshop.vue'
+import ArticlesListe from '../components/ArticlesListe.vue'
+import WorkshopListe from '../components/WorkshopListe.vue'
 import Galerie from '../components/Galerie.vue'
 import Partenaire from '../components/Partenaire.vue'
 import Connexion from '../components/Connexion.vue'
@@ -10,7 +10,7 @@ import testRegis from '../components/test.vue'
 import MonEspace from '../components/MonEspace.vue'
 import ListeContenuCreationModif from '../components/listeContenuCreationModif'
 import nouvelAdmin from '../components/nouvelAdmin'
-import evenement from '../components/evenement'
+import EvenementListe from '../components/EvenementListe'
 import nouvelGalerie from '../components/nouvelGalerie'
 
 Vue.use(VueRouter)   // utilisation du plugin VueRouter
@@ -22,20 +22,21 @@ const routes = [
     component: Accueil
   },
   {
-    path: '/articles',
-    name: 'Articles',
-    component: Articles,
+    path: '/ArticlesListe',
+    name: 'ArticlesListe',
+    component: ArticlesListe,
     props: true
   },
   {
-  path: '/evenement',
-  name: 'Evenement',
-  component: evenement
+  path: '/EvenementListe',
+  name: 'EvenementListe',
+  component: EvenementListe,
+  props: true
   },
   {
-    path: '/workshop',
-    name: 'Workshop',
-    component: Workshop
+    path: '/WorkshopListe',
+    name: 'WorkshopListe',
+    component: WorkshopListe
   },
   {
     path: '/galerie',

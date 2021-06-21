@@ -1,6 +1,6 @@
 <template>
     <div id="sideBar">
-        <div v-if="futureEvent" id="evnmtAVenir">
+        <div v-if="futureEvent[0]" id="evnmtAVenir">
             <div class="titreSideBox">Evenement à venir</div>
             <ul>
                 <li v-for="item in futureEvent" :key="item._id"  @click="loadOneEvenement(item._id)">

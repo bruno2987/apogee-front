@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <button id="boutonRetour" v-if="idAlbum" @click="retourListe">Retour</button>
+    <div id="galerie">
+        <button id="boutonOrange" v-if="idAlbum" @click="retourListe">Retour</button>
         <div v-if="!idAlbum" id="listeAlbums">
             <div class="ligneAlbum" v-for="item in albumsListe" :key="item._id" @click="seeAlbum(item._id)">
                 {{item.titre}}
@@ -57,15 +57,58 @@ $orangeF: #922105;
 $orangeC: #F65F03;
 $jaune: #F8AC1B;
 
-#listeAlbums{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 5vh;
-    column-gap: 1vh;
-    margin-left: 12vh;
-    margin-right: 12vh;
-    align-items: center;
-    justify-items: center;
+#listeAlbums .ligneAlbum:hover{   // 226, 94, 6
+    background-color: rgba(226, 94, 6,0.7); // C'est la même couleur que $jaune mais en RGBA pour pouvoir lui mettre une valeurs de transparence
+    cursor: pointer;
+}
+
+#boutonOrange{
+  height: 1.4em;
+  width: 4.7em;
+  justify-self: left;
+  text-decoration: none;
+  background-color: $orangeF;
+  border: solid 1px $jaune;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+  border-radius: 20px;
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7vw;
+}
+#boutonOrange:before {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 100%;
+  width: 3em;
+  position: absolute;
+  top: 0;
+  left: -4.5em;
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+  -webkit-transform: skewX(-45deg) translateX(0);
+  transform: skewX(-45deg) translateX(0);
+  -webkit-transition: none;
+  transition: none;
+}
+#boutonOrange:hover {
+  background-color: rgb(223, 198, 37);
+  color: black;
+  border: solid 1px black;
+}
+#boutonOrange:hover:before {
+  -webkit-transform: skewX(-45deg) translateX(18em);
+  transform: skewX(-45deg) translateX(18em);
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+}
+
+@media screen and (min-width: 1024px) {
     .ligneAlbum{
         display: grid;
         grid-template-rows: 1fr 5fr;
@@ -81,72 +124,82 @@ $jaune: #F8AC1B;
             border-radius: 10px;
         }
     }
+    #listeAlbums{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 5vh;
+        column-gap: 1vh;
+        margin-left: 12vh;
+        margin-right: 12vh;
+        align-items: center;
+        justify-items: center;
+    }
+    #oneAlbum{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 4vh;
+        column-gap: 2vh;
+        margin: 3vh;
+        align-items: center;
+        justify-items: center;
+    }
+    #boutonOrange{
+        position: fixed;
+        top: 30vh;
+        left: 10vw;
+    }
 }
 
-#listeAlbums .ligneAlbum:hover{   // 226, 94, 6
-    background-color: rgba(226, 94, 6,0.7); // C'est la même couleur que $jaune mais en RGBA pour pouvoir lui mettre une valeurs de transparence
-    cursor: pointer;
+@media screen and (max-width: 1024px) {
+    #listeAlbums{
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 5vh;
+        column-gap: 1vh;
+        align-items: center;
+        justify-items: center;
+    }
+    .ligneAlbum{
+        display: grid;
+        grid-template-rows: 1fr 5fr;
+        align-items: center;
+        justify-items: center;
+        width: 40vh;
+        height: 30vh;
+        background-image: linear-gradient(to right, rgba(248,172,27,0), rgba(248,172,27, 0.7));
+        border-radius: 10px;
+        img{
+            object-fit: cover;
+            max-height: 20vh;
+            max-width: 35vh;
+            width: auto;
+            border-radius: 10px;
+        }
+    }
+    #oneAlbum{
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 4vh;
+        margin: 3vh;
+        align-items: center;
+        justify-items: center;
+        img{
+            object-fit: cover;
+            max-height: 28vh;
+            max-width: 86vw;
+            width: auto;
+            border-radius: 10px;
+        }
+    }
+    #boutonOrange{
+      position: fixed;
+      top: 22vh;
+      left: 10vw;
+      height: 4vh;
+      width: 15vw;
+      font-size: 4vw;
+    }
 }
 
-#boutonRetour{
-  position: fixed;
-  height: 1.4em;
-  width: 5.5em;
-  grid-column: 1/1;
-  grid-row: 1/1;
-  justify-self: left;
-  text-decoration: none;
-  background-color: $orangeF;
-  border: solid 1px $jaune;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 300;
-  border-radius: 20px;
-  -webkit-transition: all 0.7s ease-in-out;
-  transition: all 0.7s ease-in-out;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  p{
-    font-size: 0.8em;
-  }
-}
-#outonRetour:before {
-  content: "";
-  background-color: rgba(255, 255, 255, 0.3);
-  height: 100%;
-  width: 3em;
-  position: fixed;
-  top: 0;
-  left: -4.5em;
-  -webkit-filter: blur(3px);
-  filter: blur(3px);
-  -webkit-transform: skewX(-45deg) translateX(0);
-  transform: skewX(-45deg) translateX(0);
-  -webkit-transition: none;
-  transition: none;
-}
-#boutonRetour:hover {
-  background-color: rgb(223, 198, 37);
-  color: black;
-  border: solid 1px black;
-}
-#boutonRetour:hover:before {
-  -webkit-transform: skewX(-45deg) translateX(18em);
-  transform: skewX(-45deg) translateX(18em);
-  -webkit-transition: all 0.7s ease-in-out;
-  transition: all 0.7s ease-in-out;
-}
-
-#oneAlbum{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 4vh;
-    column-gap: 2vh;
-    margin: 3vh;
-    align-items: center;
-    justify-items: center;
-}
 
 </style>

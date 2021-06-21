@@ -37,6 +37,7 @@
                         <p>{{item.createdDate}}</p>
                         <p>{{item.titre}}</p>
                         <p class="modif" @click="modifyOneArticle(item._id)">Modifier</p>
+                        <p class="modif" @click="deleteOneArticle(item._id)">Supprimer</p>
                     </div>
                 </div>
                 <div class="contenuParType" v-if="typeContenu === 'evenement'">
@@ -44,6 +45,7 @@
                         <p>{{item.createdDate}}</p>
                         <p>{{item.titre}}</p>
                         <p class="modif" @click="modifyOneArticle(item._id)">Modifier</p>
+                        <p class="modif" @click="deleteOneArticle(item._id)">Supprimer</p>
                     </div>
                 </div>
                 <div class="contenuParType" v-if="typeContenu === 'workshop'">
@@ -51,6 +53,7 @@
                         <p>{{item.createdDate}}</p>
                         <p>{{item.titre}}</p>
                         <p class="modif" @click="modifyOneArticle(item._id)">Modifier</p>
+                        <p class="modif" @click="deleteOneArticle(item._id)">Supprimer</p>
                     </div>
                 </div>
             </div>
@@ -116,6 +119,15 @@ export default {
                             console.log(erreur.response.data.error.message))
                         break;                        
             }
+        },
+        deleteOneArticle(id){
+                    this.http.post('http://localhost:3000/admin/articles/deleteOneArticle', {
+                        typeContenu: this.typeContenu,
+                        id: id
+                    },
+                    {headers: 
+                        {Authorization: localStorage.token, userId: localStorage.userId}}
+                    )
         }
     },
     beforeCreate() {
